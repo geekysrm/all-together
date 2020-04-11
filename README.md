@@ -16,9 +16,9 @@ We think this app will be beneficial to all trying to maintain social distancing
 
 ## Team Members
 
--   Soumya Ranjan Mohanty ([@geekysrm](https://www.github.com/@geekysrm))
--   K Sai Kishan ([@sonu12485](https://www.github.com/@sonu12485))
--   Amiya Kumar Tripathy ([@amiya-1998](https://www.github.com/@amiya-1998))
--   Bishal Subhadarshi Jena ([@kiminohero](https://www.github.com/@kiminohero))
+-   Soumya Ranjan Mohanty ([@geekysrm](https://www.github.com/geekysrm))
+-   K Sai Kishan ([@sonu12485](https://www.github.com/sonu12485))
+-   Amiya Kumar Tripathy ([@amiya-1998](https://www.github.com/amiya-1998))
+-   Bishal Subhadarshi Jena ([@kiminohero](https://www.github.com/kiminohero))
 
 From :india:
