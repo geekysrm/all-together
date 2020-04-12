@@ -7,7 +7,7 @@ export default function Header() {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
 			<Link className="navbar-brand" to="/">
-				All-together
+				All Together
 			</Link>
 			<button
 				className="navbar-toggler"
@@ -29,17 +29,17 @@ export default function Header() {
 					<li className="nav-item mr-1">
 						<NavLink
 							className="nav-link btn btn-light"
-							to="/login"
+							to="/map"
 							activeClassName="active"
 						>
-							Login With Google{" "}
 							<img
 								src={google}
 								style={{
 									maxHeight: "30px",
 								}}
 								alt="icon"
-							></img>
+							></img>{" "}
+							sonusaikishan@gmail.com
 						</NavLink>
 					</li>
 				</ul>

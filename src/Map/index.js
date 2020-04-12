@@ -69,7 +69,7 @@ class Maps extends Component {
 		const { longitude, latitude } = this.state;
 		console.log(this.props.shops);
 		return (
-			<div className="col-md-12">
+			<div>
 				<Map
 					visible={true}
 					google={this.props.google}
@@ -77,7 +77,8 @@ class Maps extends Component {
 					style={{
 						height: "600px",
 						width: "1200px",
-						marginLeft: "8%",
+						marginLeft: "auto",
+						marginRight: "auto",
 					}}
 					heatmapLibrary={true}
 					heatmap={this.state.heatmap}
@@ -114,7 +115,7 @@ export default compose(
 				collection: "shops",
 			},
 		];
-	}), // or { collection: 'users' }
+	}),
 	connect((state, props) => ({
 		shops: state.firestore.ordered.shops,
 	}))

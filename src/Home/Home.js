@@ -13,7 +13,7 @@ export default class Home extends Component {
 							<div className="col-md-6 text-center d-flex justify-content-center align-items-center">
 								<div>
 									<h3 className="display-4">
-										TBD: Catchy Tagline
+										Community helps community
 									</h3>
 								</div>
 							</div>

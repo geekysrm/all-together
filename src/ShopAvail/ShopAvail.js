@@ -5,15 +5,42 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const fakeOptions = [
-	{ value: "toothbrush", label: "Toothbrush", isDisabled: true },
-	{ value: "toothpaste", label: "Toothpaste" },
-	{ value: "soap", label: "Soap" },
-];
-
 class ShopAvail extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			options: null,
+		};
+	}
+
+	componentDidUpdate() {
+		if (this.props.shop && !this.state.options) {
+			const options = this.props.shop[0].items.map((item) => {
+				return {
+					value: item,
+					label: item,
+				};
+			});
+			const disabledOptions = this.props.shop[0].items_not_available.map(
+				(item) => {
+					return {
+						value: item,
+						label: item,
+						isDisabled: true,
+					};
+				}
+			);
+
+			this.setState({
+				options: [...options, ...disabledOptions],
+			});
+		}
+	}
+
 	render() {
 		console.log(this.props.shop);
+		console.log(this.state);
 		return (
 			<div className="container-fluid">
 				<div className="row justify-content-center">
@@ -57,7 +84,7 @@ class ShopAvail extends Component {
 								<Select
 									isMulti
 									name="colors"
-									options={fakeOptions}
+									options={this.state.options}
 									className="basic-multi-select"
 									classNamePrefix="select"
 									placeholder="Select Items"
