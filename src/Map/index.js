@@ -1,72 +1,126 @@
 import React, { Component } from "react";
-import { Map, GoogleApiWrapper } from "google-maps-react";
+import { withRouter } from "react-router-dom";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+
 import Loading from "../Loader";
 
 class Maps extends Component {
   constructor(props) {
     super(props);
-    this.placesServices = null;
-    this.autocompleteServices = null;
     this.state = {
-      latitude: 20.378425,
-      longitude: 85.825146,
-      markers: [],
+      latitude: 0,
+      longitude: 0,
     };
   }
 
   componentDidMount() {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
-        (position) =>
+        (position) => {
           this.setState({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-          }),
+          });
+        },
         (error) => error
       );
     }
 
-    if (window.google.maps.places.PlacesServiceStatus) {
-      this.placesServices = window.google.maps.places.PlacesService;
-    }
-    if (window.google.maps.places.AutocompleteService) {
-      this.autocompleteServices = window.google.maps.places.AutocompleteService;
-    }
+    this.setState({
+      heatmap: {
+        positions: [
+          { lat: 20.258, lng: 85.56 },
+          { lat: 20.268, lng: 85.55 },
+        ],
+        options: {
+          radius: 20,
+          opacity: 0.6,
+        },
+      },
+    });
   }
 
-  render() {
-    const { longitude, latitude, markers } = this.state;
-
+  renderShopMarkers = () => {
     return (
-      <>
+      this.props.shops &&
+      this.props.shops.map((shop) => {
+        return (
+          <Marker
+            key={shop.id}
+            title={shop.shopName}
+            name={shop.shopName}
+            position={{
+              lat: shop.lat,
+              lng: shop.lng,
+            }}
+            onClick={() => {
+              this.props.history.push(`/ask-shop/${shop.id}`);
+            }}
+          />
+        );
+      })
+    );
+  };
+
+  render() {
+    const { longitude, latitude } = this.state;
+    console.log(this.props.shops);
+    return (
+      <div className="col-md-12">
         <Map
+          visible={true}
           google={this.props.google}
-          zoom={14}
+          zoom={17}
           style={{
-            height: "100%",
-            width: "100%",
+            height: "600px",
+            width: "1200px",
+            marginLeft: "8%",
           }}
+          heatmapLibrary={true}
+          heatmap={this.state.heatmap}
           {...(window.navigator.geolocation && {
             initialCenter: {
               lng: longitude,
               lat: latitude,
             },
+            center: {
+              lat: latitude,
+              lng: longitude,
+            },
           })}
-          center={{
-            lat: latitude,
-            lng: longitude,
-          }}
         >
-          {markers.map((mark) => (
-            <pre>{JSON.stringify(mark, null, 2)}</pre>
-          ))}
+          <Marker
+            title={"Your Home"}
+            name={"Home"}
+            position={{
+              lat: this.state.latitude,
+              lng: this.state.longitude,
+            }}
+          />
+          {this.renderShopMarkers()}
         </Map>
-      </>
+      </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GMAP_API_KEY,
-  LoadingContainer: Loading,
-})(Maps);
+export default compose(
+  firestoreConnect((props) => {
+    return [
+      {
+        collection: "shops",
+      },
+    ];
+  }), // or { collection: 'users' }
+  connect((state, props) => ({
+    shops: state.firestore.ordered.shops,
+  }))
+)(
+  GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_GMAP_API_KEY,
+    LoadingContainer: Loading,
+  })(withRouter(Maps))
+);

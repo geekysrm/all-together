@@ -9,8 +9,8 @@ import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import store from "./store/storeConfig";
 import {
-  firebase as fbConfig,
-  reduxFirebase as rfbConfig,
+	firebase as fbConfig,
+	reduxFirebase as rfbConfig,
 } from "./store/config";
 
 import App from "./App";
@@ -19,17 +19,17 @@ firebase.initializeApp(fbConfig);
 firebase.firestore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ReactReduxFirebaseProvider
-        firebase={firebase}
-        config={rfbConfig}
-        dispatch={store.dispatch}
-        createFirestoreInstance={createFirestoreInstance}
-      >
-        <App />
-      </ReactReduxFirebaseProvider>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+	<React.StrictMode>
+		<Provider store={store}>
+			<ReactReduxFirebaseProvider
+				firebase={firebase}
+				config={rfbConfig}
+				dispatch={store.dispatch}
+				createFirestoreInstance={createFirestoreInstance}
+			>
+				<App />
+			</ReactReduxFirebaseProvider>
+		</Provider>
+	</React.StrictMode>,
+	document.getElementById("root")
 );
