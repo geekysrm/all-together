@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
+import google from "../assets/google.png";
+
 export default function Header() {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
 			<Link className="navbar-brand" to="/">
-				Navbar
+				All-together
 			</Link>
 			<button
 				className="navbar-toggler"
@@ -23,33 +25,21 @@ export default function Header() {
 				className="collapse navbar-collapse"
 				id="navbarSupportedContent"
 			>
-				<ul className="navbar-nav mr-auto">
-					<li className="nav-item">
+				<ul className="navbar-nav ml-auto">
+					<li className="nav-item mr-1">
 						<NavLink
-							className="nav-link"
-							exact
-							to="/"
+							className="nav-link btn btn-light"
+							to="/login"
 							activeClassName="active"
 						>
-							Home <span className="sr-only">(current)</span>
-						</NavLink>
-					</li>
-					<li className="nav-item">
-						<NavLink
-							className="nav-link"
-							to="/random"
-							activeClassName="active"
-						>
-							Link
-						</NavLink>
-					</li>
-					<li className="nav-item">
-						<NavLink
-							className="nav-link"
-							to="/gibrish"
-							activeClassName="active"
-						>
-							Disabled
+							Login With Google{" "}
+							<img
+								src={google}
+								style={{
+									maxHeight: "30px",
+								}}
+								alt="icon"
+							></img>
 						</NavLink>
 					</li>
 				</ul>
