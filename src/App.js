@@ -7,15 +7,22 @@ import Home from "./Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import ShopAvail from "./ShopAvail/ShopAvail";
+import Main from "./Main/Main";
+
 function App() {
 	return (
 		<Router>
 			<div>
 				<Header></Header>
 				<Switch>
-					<Route exact path="/">
-						<Home></Home>
-					</Route>
+					<Route exact path="/" component={Home}></Route>
+					<Route
+						exact
+						path="/ask-shop/:id"
+						component={ShopAvail}
+					></Route>
+					<Route exact path="/map" component={Main}></Route>
 				</Switch>
 			</div>
 		</Router>

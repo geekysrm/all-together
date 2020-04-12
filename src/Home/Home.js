@@ -28,7 +28,7 @@ export default class Home extends Component {
 						<div className="row mt-4">
 							<div className="col-md-4 mx-auto">
 								<Link
-									to="/"
+									to="/map"
 									className="btn btn-primary btn-block"
 								>
 									Let's Get Started
