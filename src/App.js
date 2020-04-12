@@ -1,9 +1,25 @@
-import React from "react"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./App.css"
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import Header from "./Header/Header";
+import Home from "./Home/Home";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function App() {
-	return <div>Hello All Together</div>
+	return (
+		<Router>
+			<div>
+				<Header></Header>
+				<Switch>
+					<Route exact path="/">
+						<Home></Home>
+					</Route>
+				</Switch>
+			</div>
+		</Router>
+	);
 }
 
-export default App
+export default App;
