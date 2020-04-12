@@ -5,6 +5,13 @@ import reducers from "./reducers";
 
 const middlewares = [thunk.withExtraArgument(getFirebase)];
 
-const store = createStore(reducers, compose(applyMiddleware(...middlewares)));
+let composeEnhancer = compose;
+
+composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  reducers,
+  composeEnhancer(applyMiddleware(...middlewares))
+);
 
 export default store;

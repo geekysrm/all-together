@@ -16,6 +16,7 @@ import {
 import App from "./App";
 
 firebase.initializeApp(fbConfig);
+firebase.firestore();
 
 ReactDOM.render(
   <React.StrictMode>
